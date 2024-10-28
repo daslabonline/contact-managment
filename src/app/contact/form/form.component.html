@@ -1,0 +1,62 @@
+<div style="margin: auto;width: 50%;padding: 20px;margin-top: 50px;">
+    @if(isEdit){
+        <h4>Edit Contact</h4>
+    }
+    @else {
+        <h4>Create Contact</h4>
+    }
+    <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="save()">
+        <div class="card" style="width: 100%;padding: 10px; margin: 20px;">
+             
+        <div class="form-group" style="padding: 10px;">
+            <div *ngIf="contactForm.controls.firstname!.touched && contactForm.controls.firstname!.invalid" >
+
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('firstname')!.errors && contactForm.get('firstname')!.hasError('required')">First name is required.</span>
+                
+                </div>
+          <label   for="first-name">First Name</label>  
+         
+          <input autocomplete="off"  type="text" class="form-control"  formControlName="firstname" id="first-name" placeholder="">
+         
+        </div>
+        <div class="form-group" style="padding: 10px;">
+            <div *ngIf="contactForm.controls.lastname!.touched && contactForm.controls.lastname!.invalid" >
+
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('lastname')!.errors && contactForm.get('lastname')!.hasError('required')">Last name is required.</span>
+                
+                </div>
+          <label for="lastname">Last Name</label>
+          <input autocomplete="off" type="text" class="form-control" formControlName="lastname" id="lastname" placeholder="">
+        </div>
+        <div class="form-group" style="padding: 10px;">
+            <div *ngIf="contactForm.controls.email!.touched && contactForm.controls.email!.invalid" >
+
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('email')!.errors && contactForm.get('email')!.hasError('required')">Email address is required.</span>
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('email')!.errors && contactForm.get('email')!.hasError('email')">Email address is not in correct format.</span>
+                </div>
+            <label for="email">Email</label>
+            <input autocomplete="off"  type="text" class="form-control" formControlName="email" id="email" placeholder="">
+          </div>
+          <div class="form-group" style="padding: 10px;">
+            <div *ngIf="contactForm.controls.phone!.touched && contactForm.controls.phone!.invalid" >
+
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('phone')!.errors && contactForm.get('phone')!.hasError('required')">Phone number is required.</span>
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('phone')!.errors && contactForm.get('phone')!.hasError('pattern')">Phone number must be of 10 digit.</span>
+                <span class="text-danger" style="float: right;position: relative;" *ngIf="contactForm.get('phone')!.errors?.['minlength'] || contactForm.get('phone')!.errors?.['maxlength']">Phone number must be of 10 digit.</span>
+ 
+                </div>
+            <label for="phone">Phone</label>
+            <input autocomplete="off" minlength="10" type="text" class="form-control" formControlName="phone" id="phone" placeholder="">
+          </div>
+          @if(isEdit){
+            <button type="submit" style="width:120px;margin:10px;" class="btn btn-primary mb-2" [disabled]="!contactForm.valid" >Update</button>
+             
+        }
+        @else {
+            <button type="submit" style="width:120px;margin:10px;" class="btn btn-primary mb-2" [disabled]="!contactForm.valid" >Save</button>
+        }
+          
+        </div>
+        
+      </form>
+</div>
